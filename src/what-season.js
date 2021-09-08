@@ -16,18 +16,19 @@ export default function getSeason(date) {
   debugger;
   if (arguments.length === 0 ) {
     return 'Unable to determine the time of year!';
-  }  else if ( !Date.parse(date) || (typeof date.getMonth !== 'function')  ) {
+  }  else if ( !Date.parse(date) || !(date instanceof Date)) {
     throw new Error("Invalid date!");
+  } else {
+    let month = date.getMonth();
+    if ( [11, 0, 1].includes(month) ) {
+      return seasons[0];
+    } else if ( [2, 3, 4].includes(month) ) {
+      return seasons[1];
+    } else if ( [5, 6, 7].includes(month) ) {
+      return seasons[2];
+    } else {
+      return seasons[3];
+    }
   } 
 
-  let month = date.getMonth();
-  if ( [11, 0, 1].includes(month) ) {
-    return seasons[0];
-  } else if ( [2, 3, 4].includes(month) ) {
-    return seasons[1];
-  } else if ( [5, 6, 7].includes(month) ) {
-    return seasons[2];
-  } else {
-    return seasons[3];
-  }
 }
