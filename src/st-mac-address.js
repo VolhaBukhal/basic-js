@@ -15,6 +15,8 @@ import { NotImplementedError } from '../extensions/index.js';
  *
  */
 export default function isMAC48Address(n) {
-  let str = n.split('-');
-  return str.every(el => parseInt(el));
+
+  let arr = [...n].filter(el => el !== '-');
+
+  return arr.every(el => !isNaN(parseInt(el, 16)) );
 }
